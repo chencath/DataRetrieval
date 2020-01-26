@@ -13,12 +13,12 @@ class BHRRCApi:
     """Class for accessing StockTwits API functions.
 
   Methods:
-    login -- Change the token used for login.
-    search -- Search for users, symbols, or both.
-    stream_symbol -- Download the stream of a symbol.
+    GetCategories  -- Download categories for detailed retrieval information.
+    GetCompany -- Search for users, symbols, or both.
+    GetStory -- Download the stories about human rights.
 
-  For more detail on StockTwits API, see the documentation at
-  https://api.stocktwits.com/developers/docs/api
+  For more detail on HumanRight API, see the documentation at
+  https://www.business-humanrights.org/en/using-our-business-and-human-rights-data-to-bring-about-change
   """
 
     def __init__(self, key: str, token: str):
