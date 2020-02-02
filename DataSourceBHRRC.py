@@ -40,6 +40,7 @@ class BHRRCApi:
         fullUri = self.baseUri + "categories"
         try:
             result = requests.get(fullUri, headers=self.headers)
+
         except Exception as e:
             print("HTTP Request fail {}\r\n{}".format(url, e))
             return None
