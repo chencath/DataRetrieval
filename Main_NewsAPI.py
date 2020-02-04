@@ -1,5 +1,6 @@
 from NewsAPI import NewsApi
 import pandas as pd
+import os
 
 
 def CreateDF(JsonArray,columns):
@@ -33,11 +34,18 @@ def main():
     df.to_csv('source_list.csv')
 
 
-    # get courty of news
+    # get news for specific country
     rst_country = api.GetHeadlines()
-    columns = [ 'author', 'title', 'description','content', 'url']
+    columns = [ 'author', 'publishedAt', 'title', 'description','content', 'url']
     df = CreateDF(rst_country['articles'], columns)
     df.to_csv('Headlines_country.csv')
+
+    # get  news for specific symbol
+    symbol = 'aapl'
+    rst_symbol =api.GetEverything(symbol)
+    columns = ['author', 'publishedAt', 'title', 'description', 'content', 'url']
+    df = CreateDF(rst_symbol['articles'], columns)
+    df.to_csv('Headlines_symbol.csv')
 
 
 

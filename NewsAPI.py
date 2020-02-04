@@ -52,7 +52,19 @@ class NewsApi:
             return None
         return json.loads(result.content)
 
+    def GetEverything(self, symbol):
+        """Download top headlines of specific country.
+    """
+        fullUri = self.baseUri + "everything"
+        getParams = {'q': symbol }
+        getParams['apiKey'] = self.api_key
 
+        try:
+            result = requests.get(fullUri, params=getParams)
+        except Exception as e:
+            print("HTTP Request fail {}\r\n{}".format(fullUri, e))
+            return None
+        return json.loads(result.content)
 
 
 
