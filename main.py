@@ -6,10 +6,10 @@ from DataSourceBHRRC import ResponseRateOperators
 
 def Main():
 
-    # access_token_NewsAPI.txt must contain your personal access token
+    # access_key_HR.txt must contain your personal access key
     with open("access_key_HR.txt", "r") as f:
         myKey = f.read()[:-1]
-    # access_token_NewsAPI.txt must contain your personal access token
+    # access_token_HR.txt must contain your personal access token
     with open("access_token_HR.txt", "r") as f:
         myToken = f.read()[:-1]
 
