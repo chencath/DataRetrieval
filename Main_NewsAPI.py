@@ -1,4 +1,10 @@
-from NewsAPI import NewsApi
+""" The Web API provided by NewsAPI https://newsapi.org/
+Search worldwide news with code
+Get breaking news headlines, and search for articles from over 30,000 news sources and blogs with news API
+"""
+
+
+from NewsAPI import NewsApi    # create module NewsAPI for object class "NewsApi"
 import pandas as pd
 import os
 
