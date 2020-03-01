@@ -1,25 +1,35 @@
+""" The Web API provided by Business and Human Rights Resource Center https://www.business-humanrights.org/
+"""
+
 import DataSourceBHRRC
 from DataSourceBHRRC import ResponseRateOperators
 
 def Main():
 
-    myKey = 'HgRyj8hRvDdKUSlxEGmlufNKjcog-8ZrtROYCu4aIX4'
-    myToken = 'JL9MD4l4pUe3i4hE-eh1nw6rjtDTR2e-FqggRab8pRY'
+    # access_token_NewsAPI.txt must contain your personal access token
+    with open("access_key_HR.txt", "r") as f:
+        myKey = f.read()[:-1]
+    # access_token_NewsAPI.txt must contain your personal access token
+    with open("access_token_HR.txt", "r") as f:
+        myToken = f.read()[:-1]
 
     api = DataSourceBHRRC.BHRRCApi(myKey, myToken)
 
     #Get Categories
-    #result = api.GetCategories()
-    #print(result)
+    result = api.GetCategories()
+    print(result)
 
     #Get a company profile
-    #result = api.GetCompany(80444)
+    result = api.GetCompany(80444)
+    print(result)
 
     #Get a story
-    #result = api.GetStory(id=173345)
+    result = api.GetStory(id=173345)
+    print(result)
 
     #Get stories
-    #result = api.GetStories(categoryId=3398)
+    result = api.GetStories(categoryId=3398)
+    print(result)
 
     #Get Company profiles
     result = api.GetCompanies(page=0, responseRate=50, responseRateOperator=ResponseRateOperators.Greater)
