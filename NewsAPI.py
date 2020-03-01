@@ -9,14 +9,14 @@ from enum import Enum
 
 
 class NewsApi:
-    """Class for accessing StockTwits API functions.
+    """Class for accessing News API functions.
 
   Methods:
     GetResource  -- get the resources of news.
     GetHeadlines -- Download top headlines of specific country.
     GetEverything -- Download top headlines of specific country.
 
-  For more detail on HumanRight API, see the documentation at
+  For more detail on News API, see the documentation at
   https://newsapi.org/
   """
 
