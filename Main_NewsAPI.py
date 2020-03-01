@@ -19,11 +19,10 @@ def CreateDF(JsonArray,columns):
     return dfData
 
 
-
-
-
 def main():
-    myKey = '3c2638e0b9b14ecd8f7b3bb2e83313c7'
+    # access_token_NewsAPI.txt must contain your personal access token
+    with open("access_token_NewsAPI.txt", "r") as f:
+        myKey = f.read()[:-1]
 
     api = NewsApi(myKey)
 
