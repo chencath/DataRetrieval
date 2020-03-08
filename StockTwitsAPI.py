@@ -42,18 +42,7 @@ class StockTwitsApi:
     result = requests.get(url)
     return(result)
 
-  # def stream_symbol(self, id, **kwargs):
-  #   """Download the stream of the symbol identified by id.
-  #
-  #   The result will contain at most 30 messages.
-  #   Additional arguments such as since and max can be used to select a specific
-  #   time period. See StockTwits documentation for more detail.
-  #   """
-  #   url = self.base + "streams/symbol/{}.json".format(id)
-  #   if self.token != "":
-  #     kwargs.update({"access_token": self.token})
-  #   result = requests.get(url, params=kwargs)
-  #   return(result)
+
 
 
 
