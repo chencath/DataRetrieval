@@ -42,6 +42,17 @@ class StockTwitsApi:
     result = requests.get(url)
     return(result)
 
+  def stream_user(self, user_id):
+    """Download the stream of the symbol identified by id.
+
+    The result will contain at most 30 messages.
+    Additional arguments such as since and max can be used to select a specific
+    time period. See StockTwits documentation for more detail.
+    """
+    url = self.base + "streams/user/{}.json".format(user_id)
+    result = requests.get(url)
+    return(result)
+
 
 
 
