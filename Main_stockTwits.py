@@ -18,7 +18,7 @@ import preprocessing as pre             # create preprocessing class for NLP
 importlib.reload(pre)
 
 
-def collect(symbol, access_token):
+def collect_symbol(symbol, access_token):
     """Download cur-related messages that are older than the oldest in database.
       """
     api = StockTwitsApi(access_token)
@@ -26,29 +26,6 @@ def collect(symbol, access_token):
     status = stream["response"]["status"]
     with open("stream{}.json".format(symbol), "w", encoding="utf-8") as f:
         json.dump(stream, f)
-
-# def cumcollect(symbol, access_token):
-#     api = StockTwitsApi(access_token)
-#     n = 0
-#     cumStream = []
-#     while n < 10:
-#         stream = api.stream_symbol(symbol).json()
-#         cumStream += stream
-#         n += 1
-#     with open("cumStream{}.json".format(symbol), "w", encoding="utf-8") as f:
-#         json.dump(cumStream, f)
-
-
-def cumcollect(symbol, access_token):
-    """Download cur-related messages that are older than the oldest in database.
-          """
-    api = StockTwitsApi(access_token)
-    n = 0
-    while n < 10:
-        stream = api.stream_symbol(symbol=Symbol).json()
-        with open("cumStream{}.json".format(symbol), "w", encoding="utf-8") as f:
-            json.dump(stream, f)
-        n += 1
 
 def collect_user(userID, access_token):
     """Download cur-related messages that are older than the oldest in database.
@@ -72,7 +49,7 @@ def main():
         access_token = f.read()[:-1]
     start = dt.datetime.now()
     Symbol='IBB'
-    collect(symbol=Symbol, access_token=access_token)   # single request
+    collect_symbol(symbol=Symbol, access_token=access_token)   # single request
     # cumcollect(symbol=Symbol, access_token=access_token)    # rate of limit: 400 requests
     print("Making timeline...")
     pre.make_timeline(symbol=Symbol)
