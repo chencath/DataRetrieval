@@ -1,13 +1,13 @@
 
 """ Demonstrate
     1. NLP (Natural Language Processing)
-    2.
-
+    2. Marry Shakespeare.txt with the lexicon
+    3. Generate a wordcloud from Shakespear text
 
 ."""
 
 import re
-# import nltk
+import nltk
 from collections import Counter
 from wordcloud import WordCloud # using python 3.7
 import matplotlib
@@ -36,29 +36,30 @@ with open('shakespeare.txt', 'r', encoding='utf-8') as shakespeare_read:
     # read(n) method will put n characters into a string
     shakespeare_string = shakespeare_read.read()
 
-    shakespeare_split = str.split(shakespeare_string, sep=',')
+shakespeare_split = str.split(shakespeare_string, sep=',')
 
-    doc_out = []
-    for k in shakespeare_split:
-        cleantextprep = str(k)
+doc_out = []
+for k in shakespeare_split:
+    cleantextprep = str(k)
         # Regex cleaning
-        expression = "[^a-zA-Z ]"  # keep only letters, numbers and whitespace
-        cleantextCAP = re.sub(expression, '', cleantextprep)  # apply regex
-        cleantext = cleantextCAP.lower()  # lower case
-        cleantext = _remove_stopwords(cleantext)
-        bound = ''.join(cleantext)
-        doc_out.append(bound)       # a list of strings
+    expression = "[^a-zA-Z ]"  # keep only letters, numbers and whitespace
+    cleantextCAP = re.sub(expression, '', cleantextprep)  # apply regex
+    cleantext = cleantextCAP.lower()  # lower case
+    cleantext = _remove_stopwords(cleantext)
+    bound = ''.join(cleantext)
+    doc_out.append(bound)       # a list of sentences
 
-    # print clean text
-    for line in doc_out:
-        print(line)
+
+# print clean text
+for line in doc_out:
+    print(line)
 
 ### Read in BL lexicon
 # Negative lexicon
 ndct = ''
 with open('bl_negative.csv', 'r', encoding='utf-8', errors='ignore') as infile:
-for line in infile:
-    ndct = ndct + line
+    for line in infile:
+        ndct = ndct + line
 
 # create a list of negative words
 ndct = ndct.split('\n')
@@ -68,8 +69,8 @@ len(ndct)
 # Positive lexicon
 pdct = ''
 with open('bl_positive.csv', 'r', encoding='utf-8', errors='ignore') as infile:
-for line in infile:
-    pdct = pdct + line
+    for line in infile:
+        pdct = pdct + line
 
 pdct = pdct.split('\n')
 pdct = [entry for entry in pdct]
@@ -93,8 +94,11 @@ def wordcount(words, dct):
             count.append([key, value])
     return count
 
-# decompose a list of strings into words
+# decompose a list of sentences into words by self-defined function
 tokens = decompose_word(doc_out)
+# decompose a list of sentences into words from NLTK module
+tokens_nltk = nltk.word_tokenize(str(doc_out))
+
 
 # generate wordcloud
 comment_words = ' '
@@ -103,16 +107,19 @@ for token in tokens:
 
 wordcloud = WordCloud(width = 800, height = 800,
                 background_color ='white',
-                stopwords = stopwords,
                 min_font_size = 10).generate(comment_words)
 
-
-
+plt.figure(figsize=(8, 8), facecolor=None)
+plt.imshow(wordcloud)
+plt.axis("off")
+plt.tight_layout(pad=0)
+plt.savefig("wordcloud.png",format='png',dpi=200)
+plt.show()
 
 # Number of words in article
 nwords = len(tokens)
 
-nwc = wordcount(tokens, ndct)
+nwc = wordcount(tokens, ndct)   # wordcount(text,lexicon)
 # [['die', 3], ['famine', 1], ['lies', 2], ['foe', 1], ['cruel', 1], ['gaudy', 1], ['waste', 2], ['pity', 1], ['besiege', 1], ['tattered', 1], ['weed', 1], ['sunken', 1], ['shame', 3], ['excuse', 1], ['cold', 1], ['beguile', 1], ['wrinkles', 1], ['dies', 1], ['abuse', 1], ['deceive', 1], ['hideous', 1], ['sap', 1], ['frost', 1], ['prisoner', 1], ['bereft', 1], ['ragged', 1], ['forbidden', 1], ['death', 1], ['burning', 1], ['weary', 1], ['feeble', 1], ['sadly', 1], ['annoy', 1], ['offend', 1], ['chide', 1], ['wilt', 2], ['fear', 1], ['wail', 1], ['weep', 1], ['deny', 1], ['hate', 2], ['conspire', 1]]
 
 pwc = wordcount(tokens, pdct)
@@ -141,3 +148,4 @@ for i in range(len(nwc)):
 print('Total number of negative words: ' + str(ntot))
 print('\n')
 print('Percentage of negative words: ' + str(round(ntot / nwords, 4)))
+
