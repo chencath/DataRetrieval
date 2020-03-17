@@ -2,7 +2,7 @@
 """ Using NLTK for
     1. removing stopwords
     2. do tokenization
-
+    3.  implementation of lemmatization words using NLTK
 ."""
 
 
@@ -28,3 +28,18 @@ for w in word_tokens:
 
 print(word_tokens)
 print(filtered_sentence)
+
+
+
+""""  implementation of lemmatization words using NLTK  """
+
+# import these modules
+from nltk.stem import WordNetLemmatizer
+
+lemmatizer = WordNetLemmatizer()
+
+print("rocks :", lemmatizer.lemmatize("rocks"))
+print("corpora :", lemmatizer.lemmatize("corpora"))
+
+# a denotes adjective in "pos"
+print("better :", lemmatizer.lemmatize("better", pos ="a"))
