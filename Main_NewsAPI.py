@@ -43,15 +43,14 @@ def main():
 
     # get news for specific country
     rst_country = api.GetHeadlines()
-    columns = [ 'author', 'publishedAt', 'title', 'description','content', 'url']
+    columns = ['author', 'publishedAt', 'title', 'description','content', 'url']
     df = CreateDF(rst_country['articles'], columns)
     df.to_csv('Headlines_country.csv')
 
     # get  news for specific symbol
     symbol = 'coronavirus'
-    # d = date(2020, 3, 1)
     columns = ['author', 'publishedAt', 'title', 'description', 'content']
-    limit = 500
+    limit = 500     # maximum requests per day
     i = 1
     startDate = dt.datetime(2020, 3, 1, 8)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[]})
