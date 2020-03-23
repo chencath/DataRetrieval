@@ -7,6 +7,8 @@ Get breaking news headlines, and search for articles from over 30,000 news sourc
 from NewsAPI import NewsApi    # create module NewsAPI for object class "NewsApi"
 import pandas as pd
 import os
+import datetime as dt
+from datetime import date
 
 
 def CreateDF(JsonArray,columns):
@@ -18,12 +20,12 @@ def CreateDF(JsonArray,columns):
         for cunColumn in columns:
             itemStruct[cunColumn] = item[cunColumn]
 
-        dfData = dfData.append(itemStruct,ignore_index=True)
+        # dfData = dfData.append(itemStruct,ignore_index=True)
             # dfData = dfData.append({'id': item['id'], 'name': item['name'], 'description': item['description']},
             #                        ignore_index=True)
 
-    return dfData
-
+    # return dfData
+    return itemStruct
 
 def main():
     # access_token_NewsAPI.txt must contain your personal access token
@@ -46,10 +48,22 @@ def main():
     df.to_csv('Headlines_country.csv')
 
     # get  news for specific symbol
-    symbol = 'aapl'
-    rst_symbol =api.GetEverything(symbol)
-    columns = ['author', 'publishedAt', 'title', 'description', 'content', 'url']
-    df = CreateDF(rst_symbol['articles'], columns)
+    symbol = 'coronavirus'
+    # d = date(2020, 3, 1)
+    columns = ['author', 'publishedAt', 'title', 'description', 'content']
+    limit = 500
+    i = 1
+    startDate = dt.datetime(2020, 3, 1, 8)
+    df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[]})
+    while i < limit:
+        endDate = startDate + dt.timedelta(hours=4)
+        rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate)
+        rst = CreateDF(rst_symbol['articles'], columns)
+        df = df.append(rst, ignore_index=True)
+        # DF.join(df.set_index('publishedAt'), on='publishedAt')
+        startDate = endDate
+        i+=1
+
     df.to_csv('Headlines_symbol.csv')
 
 
