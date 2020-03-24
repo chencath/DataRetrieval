@@ -49,14 +49,15 @@ def main():
 
     # get  news for specific symbol
     symbol = "coronavirus"
-    columns = ['author', 'publishedAt', 'title', 'description', 'content']
-    limit = 500     # maximum requests per day
+    sources = 'bbc.co.uk'
+    columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
+    limit = 100     # maximum requests per day
     i = 1
     startDate = dt.datetime(2020, 3, 1, 8)
-    df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[]})
+    df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[], 'source': []})
     while i < limit:
         endDate = startDate + dt.timedelta(hours=2)
-        rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate)
+        rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
         # DF.join(df.set_index('publishedAt'), on='publishedAt')
@@ -64,7 +65,5 @@ def main():
         i+=1
 
     df.to_csv('Headlines_symbol.csv')
-
-
 
 main()

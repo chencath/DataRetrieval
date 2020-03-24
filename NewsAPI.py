@@ -52,11 +52,11 @@ class NewsApi:
             return None
         return json.loads(result.content)
 
-    def GetEverything(self, symbol, lang, StartDate, EndDate):
+    def GetEverything(self, symbol, lang, StartDate, EndDate, sources):
         """Download top headlines of specific country.
     """
         fullUri = self.baseUri + "everything"
-        getParams = {'q': symbol, 'language': lang, 'from': StartDate, 'to': EndDate  }
+        getParams = {'q': symbol, 'language': lang, 'from': StartDate, 'to': EndDate, 'domains': sources }
         getParams['apiKey'] = self.api_key
 
         try:
