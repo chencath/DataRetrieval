@@ -48,14 +48,14 @@ def main():
     df.to_csv('Headlines_country.csv')
 
     # get  news for specific symbol
-    symbol = 'coronavirus'
+    symbol = "coronavirus"
     columns = ['author', 'publishedAt', 'title', 'description', 'content']
     limit = 500     # maximum requests per day
     i = 1
     startDate = dt.datetime(2020, 3, 1, 8)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[]})
     while i < limit:
-        endDate = startDate + dt.timedelta(hours=4)
+        endDate = startDate + dt.timedelta(hours=2)
         rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
