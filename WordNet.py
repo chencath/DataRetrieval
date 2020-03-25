@@ -27,7 +27,6 @@ for item in coop_list:
         df = df.append({'word': item, 'synonyms': synonyms, 'antonyms': antonyms}, ignore_index=True)
 
 #  search synonyms on specific word in the created dataframe
-mask = [s in users for s in data.index]
 df.index = df['word']
 searchTerm = ['good']
 mask = [ term in searchTerm for term in df.index ]
