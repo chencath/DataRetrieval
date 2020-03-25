@@ -35,17 +35,17 @@ def main():
     api = NewsApi(myKey)
 
     # get sources of news
-    columns = ['id', 'name', 'description']
-    rst_source = api.GetSources()
-    df = CreateDF(rst_source['sources'], columns)
-    df.to_csv('source_list.csv')
-
-
-    # get news for specific country
-    rst_country = api.GetHeadlines()
-    columns = ['author', 'publishedAt', 'title', 'description','content', 'url']
-    df = CreateDF(rst_country['articles'], columns)
-    df.to_csv('Headlines_country.csv')
+    # columns = ['id', 'name', 'description']
+    # rst_source = api.GetSources()
+    # df = CreateDF(rst_source['sources'], columns)
+    # df.to_csv('source_list.csv')
+    #
+    #
+    # # get news for specific country
+    # rst_country = api.GetHeadlines()
+    # columns = ['author', 'publishedAt', 'title', 'description','content', 'url']
+    # df = CreateDF(rst_country['articles'], columns)
+    # df.to_csv('Headlines_country.csv')
 
     # get  news for specific symbol
     symbol = "coronavirus"
@@ -54,6 +54,7 @@ def main():
     limit = 100     # maximum requests per day
     i = 1
     startDate = dt.datetime(2020, 3, 1, 8)
+    # startDate = dt.datetime(2020, 3, 1)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[], 'source': []})
     while i < limit:
         endDate = startDate + dt.timedelta(hours=2)
@@ -62,7 +63,7 @@ def main():
         df = df.append(rst, ignore_index=True)
         # DF.join(df.set_index('publishedAt'), on='publishedAt')
         startDate = endDate
-        i+=1
+        i += 1
 
     df.to_csv('Headlines_symbol.csv')
 
