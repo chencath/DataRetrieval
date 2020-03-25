@@ -22,19 +22,6 @@ def read_stream(symbol):
         print("Stream not found for {} ({}).".format(["title"],["symbol"]))
         return ([])
 
-# def read_cumStream(symbol):
-#     """Return the stream of messages in database related to cur.
-#
-#       cur must be a dictionary with at least keys "title" and "symbol".
-#     An empty list is returned if the corresponding JSON file doesn't exist yet.
-#       """
-#     try:
-#         with open("cumStream{}.json".format(symbol), "r", encoding="utf-8") as f:
-#             stream = json.load(f)
-#         return (stream)
-#     except FileNotFoundError:
-#         print("Stream not found for {} ({}).".format(["title"],["symbol"]))
-        return ([])
 
 def make_timeline(symbol, path="timeline.csv"):
   """Create and save timeline to disk.
@@ -75,33 +62,6 @@ def make_timeline(symbol, path="timeline.csv"):
   df.to_csv(path)
   print("Done.")
 
-
-# def make_cum_timeline(symbol, path="cum_timeline.csv"):
-#   """Create and save timeline to disk.
-#
-#   """
-#   messages = []
-#   n = 0
-#   def extract_infos(message):
-#     return(message["id"], {
-#                            "created_at": message["created_at"],
-#                            "body": preprocess(message),
-#                            "user": message["user"]["id"],
-#                            "username": message["user"]["username"],
-#                            "declared_sentiment": _declared_sentiment(message)
-#                            })
-#
-#   messages.extend([extract_infos(m) for m in read_cumStream(symbol)['messages']])
-#   # messages.extend([extract_infos(m) for m in read_stream(symbol)['messages']])
-#   print(" "*(40 + n),"\rLoading and preprocessing...")
-#   print("Creating timeline...")
-#   dic = {id: infos for id, infos in messages}
-#   df = pd.DataFrame.from_dict(dic, orient='index')
-#   df["set"] = np.array(["training", "testing"])[binomial(1, 0.25, size=len(df))]
-#   df.index.name = "id"
-#   print("Writing to disk...")
-#   df.to_csv(path)
-#   print("Done.")
 
 
 def preprocess(m):

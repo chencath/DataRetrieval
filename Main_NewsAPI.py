@@ -35,17 +35,17 @@ def main():
     api = NewsApi(myKey)
 
     # get sources of news
-    # columns = ['id', 'name', 'description']
-    # rst_source = api.GetSources()
-    # df = CreateDF(rst_source['sources'], columns)
-    # df.to_csv('source_list.csv')
-    #
-    #
-    # # get news for specific country
-    # rst_country = api.GetHeadlines()
-    # columns = ['author', 'publishedAt', 'title', 'description','content', 'url']
-    # df = CreateDF(rst_country['articles'], columns)
-    # df.to_csv('Headlines_country.csv')
+    columns = ['id', 'name', 'description']
+    rst_source = api.GetSources()
+    df = CreateDF(rst_source['sources'], columns)
+    df.to_csv('source_list.csv')
+
+
+    # get news for specific country
+    rst_country = api.GetHeadlines()
+    columns = ['author', 'publishedAt', 'title', 'description','content', 'url']
+    df = CreateDF(rst_country['articles'], columns)
+    df.to_csv('Headlines_country.csv')
 
     # get  news for specific symbol
     symbol = "coronavirus"
@@ -61,7 +61,6 @@ def main():
         rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
-        # DF.join(df.set_index('publishedAt'), on='publishedAt')
         startDate = endDate
         i += 1
 

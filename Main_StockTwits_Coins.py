@@ -64,14 +64,15 @@ def main():
     with open("access_token_stockTwits.txt", "r") as f:
         access_token = f.read()[:-1]
     start = dt.datetime.now()
-    Symbol='IBB'
+    Symbol='BTC.X'
     with open("stream{}.json".format(Symbol), "w", encoding="utf-8") as f:
         json.dump([], f)
     while not (collect(symbol=Symbol, access_token=access_token) ):
         start += dt.timedelta(hours=1)
         print("Sleeping until {}...".format(start))
         time.sleep((start - dt.datetime.now()).seconds)
-
+    print("Making timeline...")
+    pre.make_timeline()
 
 main()
 
