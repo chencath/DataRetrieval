@@ -8,13 +8,6 @@ import numpy as np
 import datetime as dt
 
 
-def read_lexicon():
-    lex = pd.read_csv("Thomas_lexicon.csv", index_col=0, sep=";")
-    lex[lex.sw == "positive"] = 1
-    lex[lex.sw == "negative"] = -1
-    return (lex["sw"].to_dict())
-
-
 def terms(txt, lexicon):
     """Return the list of all terms of txt present in self.lex.
 
