@@ -31,7 +31,7 @@ def main():
     # access_token_NewsAPI.txt must contain your personal access token
     with open("access_token_NewsAPI.txt", "r") as f:
         myKey = f.read()[:-1]
-
+    # myKey = '08cf4b67d84a47b4b3fc72d7bab9f996'
     api = NewsApi(myKey)
 
     # get sources of news
@@ -47,7 +47,7 @@ def main():
     df = CreateDF(rst_country['articles'], columns)
     df.to_csv('Headlines_country.csv')
 
-    # get  news for specific symbol
+    # get  news for specific symbol (Way 1)
     symbol = "coronavirus"
     sources = 'bbc.co.uk'
     columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
@@ -57,13 +57,29 @@ def main():
     # startDate = dt.datetime(2020, 3, 1)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[], 'source': []})
     while i < limit:
-        endDate = startDate + dt.timedelta(hours=2)
+        endDate = startDate + dt.timedelta(hours=12)
         rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
         startDate = endDate
         i += 1
 
-    df.to_csv('Headlines_symbol.csv')
+    df.to_csv('Headlines_symbol_way1.csv')
+
+    # get  news for specific symbol (Way 2)
+    symbol = "coronavirus"
+    sources = 'bbc.co.uk'
+    columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
+    startDate = dt.datetime(2020, 2, 25)
+    # startDate = dt.datetime(2020, 3, 1)
+    df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content': [], 'source': []})
+    for i in range(30):
+        endDate = startDate
+        rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
+        rst = CreateDF(rst_symbol['articles'], columns)
+        df = df.append(rst, ignore_index=True)
+        startDate += dt.timedelta(days=1)
+
+    df.to_csv('Headlines_symbol_way2.csv')
 
 main()
