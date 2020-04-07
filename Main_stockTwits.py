@@ -18,6 +18,7 @@ import preprocessing as pre             # create preprocessing class for NLP
 importlib.reload(pre)
 
 
+
 def collect_symbol(symbol, access_token):
     """Download cur-related messages that are older than the oldest in database.
       """
@@ -65,8 +66,15 @@ def main():
                        'like_count': rst['user']['like_count']})
 
     users_DF = pd.DataFrame(mydata)
-    users_DF.to_csv('Users_Info_AAPL.csv', columns=['id', 'followers', 'ideas', 'like_count'])
+    users_DF['followers_rank'] = users_DF['followers'].rank(pct=True)
+    users_DF['ideas_rank'] = users_DF['ideas'].rank(pct=True)
+    users_DF['likes_rank'] = users_DF['like_count'].rank(pct=True)
+    # users_DF['followers_rank'] = users_DF['followers'].rank(ascending=False)
+    # users_DF['ideas_rank'] = users_DF['ideas'].rank(ascending=False)
+    # users_DF['likes_rank'] = users_DF['like_count'].rank(ascending=False)
+    users_DF.to_csv('Users_Info_AAPL_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
 
+    df['default_rank'] = df['Number_legs'].rank()
 
 main()
 
