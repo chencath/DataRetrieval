@@ -57,8 +57,8 @@ def main():
     # pre.make_cum_timeline(symbol=Symbol)
 
     # get streams of specific users
-    # users = list(pd.read_csv("userID_BTC.csv", index_col=0).index)   # BTC users
-    users = list(pd.read_csv("userID_AAPL.csv", index_col=0).index)  # AAPL users
+    users = list(pd.read_csv("userID_BTC.csv", index_col=0).index)   # BTC users
+    # users = list(pd.read_csv("userID_AAPL.csv", index_col=0).index)  # AAPL users
     mydata = []
     for user in users:
         rst = collect_user(userID=user, access_token=access_token)
@@ -72,9 +72,10 @@ def main():
     # users_DF['followers_rank'] = users_DF['followers'].rank(ascending=False)
     # users_DF['ideas_rank'] = users_DF['ideas'].rank(ascending=False)
     # users_DF['likes_rank'] = users_DF['like_count'].rank(ascending=False)
-    users_DF.to_csv('Users_Info_AAPL_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
+    # users_DF.to_csv('Users_Info_AAPL_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
+    users_DF.to_csv('Users_Info_BTC_Rank.csv',
+                    columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
 
-    df['default_rank'] = df['Number_legs'].rank()
 
 main()
 
