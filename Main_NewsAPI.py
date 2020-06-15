@@ -9,7 +9,6 @@ import pandas as pd
 import os
 import datetime as dt
 from datetime import date
-import time
 
 
 def CreateDF(JsonArray,columns):
@@ -52,19 +51,18 @@ def main():
     symbol = "coronavirus"
     sources = 'bbc.co.uk'
     columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
-    limit = 500     # maximum requests per day
+    limit = 100     # maximum requests per day
     i = 1
     startDate = dt.datetime(2020, 3, 1, 8)
     # startDate = dt.datetime(2020, 3, 1)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content':[], 'source': []})
     while i < limit:
-        endDate = startDate + dt.timedelta(hours=2)
+        endDate = startDate + dt.timedelta(hours=12)
         rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
         startDate = endDate
         i += 1
-        time.sleep(30)
 
     df.to_csv('Headlines_symbol_way1.csv')
 
@@ -73,17 +71,14 @@ def main():
     sources = 'bbc.co.uk'
     columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
     startDate = dt.datetime(2020, 2, 25)
-    start = dt.datetime.now()
     # startDate = dt.datetime(2020, 3, 1)
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content': [], 'source': []})
-    for i in range(10):
+    for i in range(30):
         endDate = startDate
         rst_symbol = api.GetEverything(symbol, 'en', startDate, endDate, sources)
         rst = CreateDF(rst_symbol['articles'], columns)
         df = df.append(rst, ignore_index=True)
         startDate += dt.timedelta(days=1)
-        print("Sleeping until {}...".format(start))
-        time.sleep(30)
 
     df.to_csv('Headlines_symbol_way2.csv')
 
