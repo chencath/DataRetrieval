@@ -57,8 +57,21 @@ def main():
     # pre.make_cum_timeline(symbol=Symbol)
 
     # get streams of specific users
-    users = list(pd.read_csv("userID_BTC.csv", index_col=0).index)   # BTC users
+    # users = list(pd.read_csv("userID_BTC.csv", index_col=0).index)   # BTC users
     # users = list(pd.read_csv("userID_AAPL.csv", index_col=0).index)  # AAPL users
+
+    # AAPL daily
+    # users = [165596, 619769, 800154, 894342, 257806, 7108, 128933, 962572, 349810, 159063, 176375, 866286, 850976, 47688, 397769, 265383, 55919, 16412, 1254166, 509070, 263357, 452242, 547349, 473512, 945301, 917666, 456965, 532213, 204553, 260062, 1438287, 328280, 322599, 1395651, 1338263, 610678, 186498, 1231418, 1223051, 1556397, 555585, 1659280, 1540223, 1120509, 847223]
+    # AAPL weekly
+    # users = [800154, 165596, 894342, 619769, 850976, 7108, 159063, 176375, 5, 128933, 397769, 60219, 811055, 866286, 3553, 1111579, 473512, 767238, 252342, 144811, 551323, 67907, 112631, 977407, 547349, 945301, 509070, 8115, 962572, 457792, 348830, 322991, 998751, 452242, 526780, 456965]
+
+    # BTC daily
+    # users = [1171931, 849941, 434891, 1254166, 733492, 187279, 763629, 811974, 284090, 398367, 700724, 1212603, 1368451, 709293, 1226091, 368953, 858394, 296805, 1165570, 1419576, 329838, 1226488, 1245128, 1369055, 807296, 1439262, 1454127, 1377485, 1479436, 1368012, 1406268, 1561236, 1468340, 1576025, 1595857, 1600006]
+    # BTC weekly
+    users = [434891, 700582, 849941, 392861, 917405, 700724, 187279, 5, 284090, 733492, 1171931, 881282, 743465, 552831, 43523, 281304, 763629, 1165570, 398367, 655752, 709293, 1084952, 912176, 906518, 1259658, 1168724, 1341714]
+
+    users = [962572, ]
+
     mydata = []
     for user in users:
         rst = collect_user(userID=user, access_token=access_token)
@@ -72,8 +85,13 @@ def main():
     # users_DF['followers_rank'] = users_DF['followers'].rank(ascending=False)
     # users_DF['ideas_rank'] = users_DF['ideas'].rank(ascending=False)
     # users_DF['likes_rank'] = users_DF['like_count'].rank(ascending=False)
-    # users_DF.to_csv('Users_Info_AAPL_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
-    users_DF.to_csv('Users_Info_BTC_Rank.csv',
+    # users_DF.to_csv('results/Users_Info_AAPL_Daily_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
+    # users_DF.to_csv('results/Users_Info_AAPL_Weekly_Rank.csv', columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
+
+    users_DF.to_csv('results/Users_Info_BTC_Daily_Rank.csv',
+                    columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
+
+    users_DF.to_csv('results/Users_Info_BTC_Weekly_Rank.csv',
                     columns=['id', 'followers', 'ideas', 'like_count', 'followers_rank', 'ideas_rank', 'likes_rank'])
 
 
