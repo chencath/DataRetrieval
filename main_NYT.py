@@ -21,4 +21,6 @@ api_method.api_retrieval(api_key, start=2019, end=2020, working_dir=wk_dir)
 """  Step 2: Parse JSON files to dataframe   """
 from NewYorkTime.ParseJSON import PasringJSON
 
-JsonData = PasringJSON.FindFiles(wk_dir, 2019, 2020)
+JsonData = PasringJSON(wk_dir, 2019, 2020)
+ParsedData=JsonData.GetDataFrame()
+ParsedData

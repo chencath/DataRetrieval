@@ -13,7 +13,7 @@ class PasringJSON:
         self.__start = start
         self.__end = end
 
-    def FindFiles(self):
+    def GetDataFrame(self):
         fileName = self.__filePath + '/nyt_'
         files = [glob.glob(fileName + str(i) + "*.json") for i in range(self.__start, self.__end)]
         files = [item for sublist in files for item in sublist]
