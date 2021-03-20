@@ -8,17 +8,17 @@ from NewYorkTime.utils import generate_tokens
 
 class PasringJSON:
 
-    def __init__(self, filePath, start, end):
+    def __init__(self, filePath):
         self.__filePath = filePath
-        self.__start = start
-        self.__end = end
 
     def GetDataFrame(self):
-        fileName = self.__filePath + '/nyt_'
-        files = [glob.glob(fileName + str(i) + "*.json") for i in range(self.__start, self.__end)]
-        files = [item for sublist in files for item in sublist]
-        p = multiprocessing.Pool(processes=multiprocessing.cpu_count())
-        output = p.map(parse_monthly_json, files)
+        fileNameSearch = self.__filePath + '/nyt_*'
+        fileNames = glob.glob(fileNameSearch)
+
+        output = []
+        for fileName in fileNames:
+            print(fileName)
+            output.append(parse_monthly_json(fileName))
         return(output)
 
 

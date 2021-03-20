@@ -4,7 +4,7 @@ def parse_monthly_json(file_path):
     import pandas as pd
 
     # parse the monthly json file that was downloaded
-    with open(file_path) as json_file:
+    with open(file_path, encoding='utf-8') as json_file:
         parsed = json.load(json_file)
 
     # initialise collection of desired data items
