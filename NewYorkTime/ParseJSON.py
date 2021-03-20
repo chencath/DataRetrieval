@@ -14,8 +14,8 @@ class PasringJSON:
         self.__end = end
 
     def FindFiles(self):
-        fileName = self.__filePath
-        files = [glob.glob( fileName + str(i) + "*.json") for i in range(self.__start, self.__end)]
+        fileName = self.__filePath + '/nyt_'
+        files = [glob.glob(fileName + str(i) + "*.json") for i in range(self.__start, self.__end)]
         files = [item for sublist in files for item in sublist]
         p = multiprocessing.Pool(processes=multiprocessing.cpu_count())
         output = p.map(parse_monthly_json, files)
