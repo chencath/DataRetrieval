@@ -11,26 +11,25 @@ import os
 
 class Retrieval:
 
-    retry_strategy = Retry(
-        total=3,
-        status_forcelist=[429, 500, 502, 503, 504],
-        method_whitelist=["HEAD", "GET", "OPTIONS"],
-        backoff_factor=1
-    )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
-    http = requests.Session()
-    http.mount("https://", adapter)
-    http.mount("http://", adapter)
-
     # for each year-month, make http request for all article headlines and abstracts that month
     @staticmethod
     def api_retrieval(api_key, start, end, working_dir):
+        retry_strategy = Retry(
+            total=3,
+            status_forcelist=[429, 500, 502, 503, 504],
+            method_whitelist=["HEAD", "GET", "OPTIONS"],
+            backoff_factor=1
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        httpL = requests.Session()
+        httpL.mount("https://", adapter)
+        httpL.mount("http://", adapter)
         for year in range(end, start, -1):
             for month in range(12, 0, -1):
                 print(year, month)
 
                 # http request
-                req = http.get(
+                req = httpL.get(
                     "https://api.nytimes.com/svc/archive/v1/{y}/{m}.json?api-key={key}".format(key=api_key, y=year,
                                                                                                m=month))
 
