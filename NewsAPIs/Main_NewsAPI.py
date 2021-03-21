@@ -5,6 +5,7 @@ Get breaking news headlines, and search for articles from over 30,000 news sourc
 from NewsAPIs.NewsAPI import NewsApi    # create module NewsAPI for object class "NewsApi"
 import pandas as pd
 import datetime as dt
+import os
 
 def CreateDF(JsonArray,columns):
     dfData = pd.DataFrame()
@@ -20,14 +21,16 @@ def CreateDF(JsonArray,columns):
 
 def main():
     # access_token_NewsAPI.txt must contain your personal access token
+    os.chdir('/Users/cathychen/PycharmProjects/resources')
     with open("access_token_NewsAPI.txt", "r") as f:
         myKey = f.read()[:-1]
 
     # Parameters for query
     symbol = "coronavirus"
+    # symbol = "tesla"
     sources = 'bbc.co.uk'
     pageSize = 100
-    startDateTime = dt.datetime(2020, 3, 1)
+    startDateTime = dt.datetime(2021, 2, 22)
     durationDays = 10
 
     # end of parameters for query section
