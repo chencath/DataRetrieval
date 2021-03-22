@@ -18,9 +18,11 @@ os.chdir('/Users/cathychen/PycharmProjects/resources')
 with open("access_token_NYT.txt", "r") as keyfile:
    api_key = keyfile.readlines()[0]
 
+print(api_key)
+
 wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive'
 # access api of new york time news, given api_key and working_dir
-NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2019, endYear=2020, working_dir=wk_dir)
+NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2018, endYear=2019, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
 from NewYorkTime.ParseJSON import PasringJSON
@@ -38,6 +40,9 @@ print(result)
 df = pd.concat(result)
 df.sort_values(by="pub_date", inplace=True)
 df.reset_index(drop=True, inplace=True)
+
+df.keys()
+
 
 """  Step 3: Slice dataframe   """
 # select only certain sections (1.4m out of total of around 3.9m articles)
