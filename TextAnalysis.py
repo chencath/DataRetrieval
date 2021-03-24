@@ -37,6 +37,8 @@ with open('shakespeare.txt', 'r', encoding='utf-8') as shakespeare_read:
     shakespeare_string = shakespeare_read.read()
 
 shakespeare_split = str.split(shakespeare_string, sep=',')
+print(shakespeare_split)
+len(shakespeare_split)
 
 doc_out = []
 for k in shakespeare_split:
@@ -49,6 +51,8 @@ for k in shakespeare_split:
     bound = ''.join(cleantext)
     doc_out.append(bound)       # a list of sentences
 
+print(doc_out)
+print(shakespeare_split)
 
 # print clean text
 for line in doc_out:
@@ -63,7 +67,7 @@ with open('bl_negative.csv', 'r', encoding='utf-8', errors='ignore') as infile:
 
 # create a list of negative words
 ndct = ndct.split('\n')
-ndct = [entry for entry in ndct]
+# ndct = [entry for entry in ndct]
 len(ndct)
 
 # Positive lexicon
@@ -73,7 +77,7 @@ with open('bl_positive.csv', 'r', encoding='utf-8', errors='ignore') as infile:
         pdct = pdct + line
 
 pdct = pdct.split('\n')
-pdct = [entry for entry in pdct]
+# pdct = [entry for entry in pdct]
 len(pdct)
 
 
@@ -104,6 +108,8 @@ tokens_nltk = nltk.word_tokenize(str(doc_out))
 comment_words = ' '
 for token in tokens:
     comment_words = comment_words + token + ' '
+
+print(comment_words)
 
 wordcloud = WordCloud(width = 800, height = 800,
                 background_color ='white',
