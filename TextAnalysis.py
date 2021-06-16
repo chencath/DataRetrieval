@@ -67,7 +67,7 @@ with open('bl_negative.csv', 'r', encoding='utf-8', errors='ignore') as infile:
 
 # create a list of negative words
 ndct = ndct.split('\n')
-# ndct = [entry for entry in ndct]
+ndct = [entry for entry in ndct]
 len(ndct)
 
 # Positive lexicon

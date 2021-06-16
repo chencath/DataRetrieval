@@ -12,6 +12,11 @@ from nltk.tokenize import word_tokenize
 example_sent = "This is a sample sentence, showing off the stop words filtration."
 # stop words in English
 stop_words = set(stopwords.words('english'))
+stop_words_list = list(stopwords.words('english'))
+STOPWORDS = ["an", "a", "the", "or", "and", "thou", "must", "that", "this", "self", "unless", "behind", "for", "which",
+             "whose", "can", "else", "some", "will", "so", "from", "to", "by", "within", "of", "upon", "th", "with",
+             "it"]
+expanded_stopWords=stop_words_list + STOPWORDS
 # stop words in German
 stop_words_German = set(stopwords.words('german'))
 # stop words in Italian

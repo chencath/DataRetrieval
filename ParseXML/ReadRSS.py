@@ -26,6 +26,7 @@ content.entries
 titles = []
 for item in content.entries:
     titles.append(item['title'])
+    print(item['title'])
     ##print("{0}.{1}".format(index, item["title"]))
 
 summarys = []
