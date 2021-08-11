@@ -14,7 +14,7 @@ import pandas as pd
 import os
 
 
-# retrieve RSS feedback
+# retrieve RSS news feed from Financial Times
 content = feedparser.parse("https://www.ft.com/?edition=international&format=rss")
 
 # list all titles
