@@ -44,19 +44,28 @@ dom.getElementsByTagName("title")[0].childNodes[0].data
 # Out[16]: 'Demo slideshow'
 
 
+"""
+Description:
+ Parsing xml in google news
+"""
 response = requests.get(
     "https://news.google.com/news/rss/headlines/section/q/finance%20news/finance%20news?ned=us&hl=en")
 content = response.content
 news_dom = xml.dom.minidom.parseString(content)
-news_dom.getElementsByTagName()
+news_dom.getElementsByTagName("title")
 news_dom.getElementsByTagName("title")[0].childNodes
 # <DOM Text node "'"finance n'...">
 news_dom.getElementsByTagName("title")[1].childNodes
 # [<DOM Text node "'Stock mark'...">]
 news_dom.getElementsByTagName("link")[1].childNodes
 # [<DOM Text node "'https://fi'...">]
+news_dom.getElementsByTagName("pubDate")[1].childNodes
 
 
+"""
+Description:
+ Parsing xml in treasury bills
+"""
 response = requests.get(
     "https://www.treasury.gov/resource-center/data-chart-center/interest-rates/Datasets/daily_treas_bill_rates.xml")
 content = response.content
