@@ -25,7 +25,6 @@ wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive'
 NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2018, endYear=2019, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
-from NewYorkTime.ParseJSON import PasringJSON
 
 fileNameSearch = wk_dir + '/nyt_*'
 fileNames = glob.glob(fileNameSearch)

@@ -42,6 +42,7 @@ RSS_df = pd.DataFrame(list(rst), columns=['title', 'summary'])
 ## URL of WSJ RSS feed where you can find news category
 url_1="https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
 url_2="https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml"
+rul_3="https://feeds.a.dj.com/rss/RSSWorldNews.xml"
 content = feedparser.parse(url_2)
 
 # list all titles

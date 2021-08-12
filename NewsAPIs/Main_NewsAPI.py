@@ -30,8 +30,8 @@ def main():
     # symbol = "tesla"
     sources = 'bbc.co.uk'
     pageSize = 100
-    startDateTime = dt.datetime(2021, 2, 22)
-    durationDays = 10
+    startDateTime = dt.datetime(2021, 7, 12)
+    durationDays = 40
 
     # end of parameters for query section
 
@@ -51,6 +51,6 @@ def main():
         rst = CreateDF(result['articles'], columns)
         df = df.append(rst, ignore_index=True)
 
-    df.to_csv('Headlines_symbol_way2.csv')
+    df.to_csv('Headlines_everything.csv')
 
 main()
