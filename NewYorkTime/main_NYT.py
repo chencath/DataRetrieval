@@ -13,16 +13,17 @@ importlib.reload(NewYorkTime.api_NYT)
 """  Step 1: API requests and data retrieval    """
 
 # load API key, which can be generated for free here: https://developer.nytimes.com/accounts/create
-os.chdir('/Users/cathychen/PycharmProjects/resources')
+# os.chdir('/Users/cathychen/PycharmProjects/resources')
+os.chdir('/Users/cathy/PycharmProjects/resources')
 
 with open("access_token_NYT.txt", "r") as keyfile:
    api_key = keyfile.readlines()[0]
 
 print(api_key)
 
-wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive'
+wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive'
 # access api of new york time news, given api_key and working_dir
-NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2018, endYear=2019, working_dir=wk_dir)
+NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2012, endYear=2013, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
 
