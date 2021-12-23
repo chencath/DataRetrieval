@@ -25,7 +25,8 @@ with open("access_token_NYT.txt", "r") as keyfile:
 
 print(api_key)
 
-wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive'
+wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive_business'
+# wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive'
 # access api of new york time news, given api_key and working_dir
 NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2012, endYear=2013, working_dir=wk_dir)
 
@@ -51,8 +52,10 @@ df.keys()
 """  Step 3: Slice dataframe   """
 # select only certain sections (1.4m out of total of around 3.9m articles)
 # list of all sections/desks here: https://developer.nytimes.com/docs/articlesearch-product/1/overview
-sections = ["World", "U.S.", "Business Day", "Business", "Technology", "Job Market"]
-desks = ["Business/Financial Desk", "Business", "Business Day", "Financial", "Outlook", "Politics"]
+sections = ["Business Day", "Business"]
+# sections = ["World", "U.S.", "Business Day", "Business", "Technology", "Job Market"]
+desks = ["Business/Financial Desk", "Business", "Business Day", "Financial", "Outlook"]
+# desks = ["Business/Financial Desk", "Business", "Business Day", "Financial", "Outlook", "Politics"]
 # sections = ["World", "U.S.", "Business Day", "Technology"]
 # desks = ["Business/Financial Desk", "Business", "Business Day", "Financial Desk"]
 print(df.columns)
@@ -81,5 +84,5 @@ stop = nltk.corpus.stopwords.words("english")
 print(stop)
 df['abstract'] = df['abstract'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 os.chdir('/Users/cathy/PycharmProjects/resources')
-df.to_csv('NYT_DF.csv')
+df.to_csv('NYT_business.csv')
 
