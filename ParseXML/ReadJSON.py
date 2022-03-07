@@ -13,6 +13,7 @@ import pandas as pd
 url = 'http://data.thecrix.de/data/crix.json'
 r = requests.get(url)
 
+
 content = r.content
 # json.loads : parse a JSON string
 js_content = json.loads(content)

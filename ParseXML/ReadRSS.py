@@ -43,7 +43,8 @@ RSS_df = pd.DataFrame(list(rst), columns=['title', 'summary'])
 url_1="https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
 url_2="https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml"
 rul_3="https://feeds.a.dj.com/rss/RSSWorldNews.xml"
-content = feedparser.parse(url_2)
+url_4="https://feeds.a.dj.com/rss/RSSWorldNews.xml"
+content = feedparser.parse(url_4)
 
 # list all titles
 dfData_title = pd.DataFrame(columns=['title'])
