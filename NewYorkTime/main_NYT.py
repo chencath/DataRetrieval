@@ -7,22 +7,28 @@ import importlib
 import NewYorkTime.utils
 import pandas as pd
 import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+import pandas as pd
+import re
 
 importlib.reload(NewYorkTime.api_NYT)
 
 """  Step 1: API requests and data retrieval    """
 
 # load API key, which can be generated for free here: https://developer.nytimes.com/accounts/create
-os.chdir('/Users/cathychen/PycharmProjects/resources')
+# os.chdir('/Users/cathychen/PycharmProjects/resources')
+os.chdir('/Users/cathy/PycharmProjects/resources')
 
 with open("access_token_NYT.txt", "r") as keyfile:
    api_key = keyfile.readlines()[0]
 
 print(api_key)
 
-wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive'
+wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive_business'
+# wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive'
 # access api of new york time news, given api_key and working_dir
-NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2018, endYear=2019, working_dir=wk_dir)
+NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2012, endYear=2013, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
 
@@ -41,13 +47,17 @@ df.sort_values(by="pub_date", inplace=True)
 df.reset_index(drop=True, inplace=True)
 
 df.keys()
-
+# Index(['pub_date', 'headline', 'abstract', 'news_desk', 'section_name'], dtype='object')
 
 """  Step 3: Slice dataframe   """
 # select only certain sections (1.4m out of total of around 3.9m articles)
 # list of all sections/desks here: https://developer.nytimes.com/docs/articlesearch-product/1/overview
-sections = ["World", "U.S.", "Business Day", "Technology"]
-desks = ["Business/Financial Desk", "Business", "Financial Desk"]
+sections = ["Business Day", "Business"]
+# sections = ["World", "U.S.", "Business Day", "Business", "Technology", "Job Market"]
+desks = ["Business/Financial Desk", "Business", "Business Day", "Financial", "Outlook"]
+# desks = ["Business/Financial Desk", "Business", "Business Day", "Financial", "Outlook", "Politics"]
+# sections = ["World", "U.S.", "Business Day", "Technology"]
+# desks = ["Business/Financial Desk", "Business", "Business Day", "Financial Desk"]
 print(df.columns)
 df = df[df.section_name.isin(sections) | df.news_desk.isin(desks)]
 
@@ -73,5 +83,6 @@ df.abstract = df.abstract.str.strip().str.lower()
 stop = nltk.corpus.stopwords.words("english")
 print(stop)
 df['abstract'] = df['abstract'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
-df.to_csv('NYT_DF.csv')
+os.chdir('/Users/cathy/PycharmProjects/resources')
+df.to_csv('NYT_business.csv')
 
