@@ -41,7 +41,7 @@ class NewsApi:
         """Download top headlines of specific country.
     """
         fullUri = self.baseUri + "top-headlines"
-        getParams = {'country': country }
+        getParams = {'country': country}
         getParams['apiKey'] = self.api_key
 
         try:

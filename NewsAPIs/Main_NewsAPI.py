@@ -25,17 +25,19 @@ def main():
     with open("access_token_NewsAPI.txt", "r") as f:
         myKey = f.read()[:-1]
 
+    myKey = '9078433caf274bf3a1d002b191375d9c'
     # Parameters for query
     symbol = "Omicron"
     # symbol = "tesla"
     sources = 'bbc.co.uk'
     pageSize = 100
-    startDateTime = dt.datetime(2022, 2, 7)
-    durationDays = 40
+    startDateTime = dt.datetime(2022, 2, 9)
+    durationDays = 30
 
     # end of parameters for query section
 
     api = NewsApi(myKey)
+
     endDateTime = startDateTime + dt.timedelta(days=durationDays) - dt.timedelta(seconds=1)
     columns = ['author', 'publishedAt', 'title', 'description', 'content', 'source']
     df = pd.DataFrame({'author': [], 'publishedAt': [], 'title': [], 'description': [], 'content': [], 'source': []})
