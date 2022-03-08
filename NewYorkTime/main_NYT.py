@@ -1,4 +1,8 @@
-# downloader script for nyt metadata archive
+# Retrieve news articles from New York Times News Archive API
+# """  Step 1: API requests and data retrieval    """
+# """  Step 2: Parse JSON files to dataframe   """
+# """  Step 3: Slice dataframe   """
+# """  Step 4: Basic NLP   """
 # see information here: https://archive.nytimes.com/www.nytimes.com/ref/membercenter/nytarchive.html
 import NewYorkTime.api_NYT
 import os
@@ -17,18 +21,16 @@ importlib.reload(NewYorkTime.api_NYT)
 """  Step 1: API requests and data retrieval    """
 
 # load API key, which can be generated for free here: https://developer.nytimes.com/accounts/create
-# os.chdir('/Users/cathychen/PycharmProjects/resources')
-os.chdir('/Users/cathy/PycharmProjects/resources')
+os.chdir('/Users/cathychen/PycharmProjects/resources')
 
 with open("access_token_NYT.txt", "r") as keyfile:
    api_key = keyfile.readlines()[0]
 
 print(api_key)
 
-wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive_business'
-# wk_dir='/Users/cathy/PycharmProjects/resources/NYT_archive'
+wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive_business'
 # access api of new york time news, given api_key and working_dir
-NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2012, endYear=2013, working_dir=wk_dir)
+NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2020, endYear=2021, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
 
@@ -83,6 +85,6 @@ df.abstract = df.abstract.str.strip().str.lower()
 stop = nltk.corpus.stopwords.words("english")
 print(stop)
 df['abstract'] = df['abstract'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
-os.chdir('/Users/cathy/PycharmProjects/resources')
+os.chdir('/Users/cathychen/PycharmProjects/resources')
 df.to_csv('NYT_business.csv')
 

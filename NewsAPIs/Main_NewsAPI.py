@@ -26,11 +26,11 @@ def main():
         myKey = f.read()[:-1]
 
     # Parameters for query
-    symbol = "coronavirus"
+    symbol = "Omicron"
     # symbol = "tesla"
     sources = 'bbc.co.uk'
     pageSize = 100
-    startDateTime = dt.datetime(2021, 7, 12)
+    startDateTime = dt.datetime(2022, 2, 7)
     durationDays = 40
 
     # end of parameters for query section

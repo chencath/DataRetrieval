@@ -5,7 +5,6 @@ Get breaking news headlines, and search for articles from over 30,000 news sourc
 
 import requests
 import json
-from enum import Enum
 
 
 class NewsApi:
