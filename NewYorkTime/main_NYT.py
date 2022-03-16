@@ -30,7 +30,7 @@ print(api_key)
 
 wk_dir='/Users/cathychen/PycharmProjects/resources/NYT_archive_business'
 # access api of new york time news, given api_key and working_dir
-NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2020, endYear=2021, working_dir=wk_dir)
+NewYorkTime.api_NYT.ApiRetrival(api_key, startYear=2019, endYear=2020, working_dir=wk_dir)
 
 """  Step 2: Parse JSON files to dataframe   """
 

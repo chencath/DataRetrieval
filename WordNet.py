@@ -7,6 +7,7 @@ Import wordnet module
 
 from nltk.corpus import wordnet
 import numpy as np
+import pandas as pd
 
 syns = wordnet.synsets("program")
 print(syns[0].name())

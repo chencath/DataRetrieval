@@ -77,7 +77,7 @@ with open('bl_positive.csv', 'r', encoding='utf-8', errors='ignore') as infile:
         pdct = pdct + line
 
 pdct = pdct.split('\n')
-# pdct = [entry for entry in pdct]
+pdct = [entry for entry in pdct]
 len(pdct)
 
 
@@ -112,7 +112,7 @@ for token in tokens:
 print(comment_words)
 
 wordcloud = WordCloud(width = 800, height = 800,
-                background_color ='white',
+                background_color ='black',
                 min_font_size = 10).generate(comment_words)
 
 plt.figure(figsize=(8, 8), facecolor=None)
